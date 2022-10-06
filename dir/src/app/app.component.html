@@ -1,0 +1,184 @@
+<div class="container">
+
+  <h4>NgStyle </h4>
+
+  <div [style.font-size]="hi ? 'x-large' : 'smaller'">
+    This div is x-large or smaller
+  </div>
+
+  <h5>Binding to currentStyles - CSS property names</h5>
+  <p>currentStyles is {{currentStyles | json}}</p>
+
+
+  <div [ngStyle]="currentStyles">
+    This div is initially italic, normal weight, and extra large (20px).
+  </div>
+
+  <br>
+  <label>italic: <input type="checkbox" [(ngModel)]="Save"></label>
+  <label>normal: <input type="checkbox" [(ngModel)]="isUnchanged"></label>
+  <label>xlarge: <input type="checkbox" [(ngModel)]="hi"></label>
+  <button type="button" (click)="setCurrentStyles()">Refresh Styles</button>
+  <br><br>
+
+  <div [ngStyle]="currentStyles">
+    This div should be {{ Save ? "italic": "plain"}},
+    {{ isUnchanged ? "normal weight" : "bold" }} and,
+    {{ hi ? "large": "normal size"}} after clicking "Refresh".
+  </div>
+  <br>
+  <hr>
+
+
+  <h3>Attribute Directive</h3>
+
+  <h5>Pick a highlight color</h5>
+  <div>
+    <input type="radio" name="colors" (click)="color='Green'" />Green
+    <input type="radio" name="colors" (click)="color='Yellow'" />Yellow
+    <input type="radio" name="colors" (click)="color='Cyan'" />Cyan
+  </div>
+
+  <p [appHighlights]="color">Welcome</p>
+
+  <p [appHighlights]="color" defaultColor="blue">Welcome Home</p>
+  <hr>
+
+
+  <h3>Built-in directives</h3>
+
+  <form #sample="ngForm" (ngSubmit)="save(sample)">
+
+    <label class="form-control">
+      <input type="radio" name="gender" value="male" ngModel>male</label>
+
+    <label class="form-control">
+      <input type="radio" name="gender" value="female" ngModel>female</label>
+    <button class="btn">click</button>
+  </form>
+
+  <hr>
+
+  <h3>Pipes</h3>
+
+  <b> Normal </b><br>
+
+  short : {{day | date: 'd/MM/yy, h:mm a' | uppercase}} <br>
+  Medium : {{day | date: 'd/MMM/yy, h:mm:ss a'}} <br>
+  Long : {{day | date: 'dd/MMMM/yyyy, h:mm:ss a z'}} <br>
+  full : {{day | date: 'd/MM/yy,EEEE, h:mm a'}} <br><br><hr>
+
+  <b>DATE</b><br>
+
+  short : {{day | date: 'd-M-yy'}} <br>
+  Medium : {{day | date: 'dd-MMM-yy'}} <br>
+  long : {{day | date: 'fullDate'}} <br>
+  full : {{day | date: 'dd-MMMM-yyyy EEEE'}} <br>
+  full : {{day | date: 'shortDate'}} <br><br><hr>
+
+
+  <b>TIME</b><br>
+
+  short : {{day | date: 'h:mm a'}} <br>
+  Medium : {{day | date: 'h:mm:ss a'}} <br>
+  long : {{day | date: 'h:mm:ss a z'}} <br>
+  full : {{day|date: 'h:mm:ss a zzzz'}} <br><br><hr>
+
+  <b>Digit</b><br>
+
+  {{pi | number}} <br>
+  {{pi | number:'4.1-5'}}<br>
+  {{pi | number:'4.1-5':'fr'}}<br><hr>
+
+  <b>Currency</b><br>
+
+  {{a | currency}} <br>
+  <p>{{a | currency:'INR'}} </p>
+  <p>{{a | currency:'INR':"code" }} </p>
+  <p>{{a | currency:'INR':'symbol'}} </p>
+  <p>{{a | currency:'CAD'}}</p><hr>
+
+  <b>Word</b><br>
+  <p>{{title|uppercase}}</p>
+  <p>{{title|lowercase}}</p>
+  <p>{{title|titlecase}}</p>
+
+  <p>{{b | percent}}</p>
+  <p>{{b | percent:'2.1'}}</p><hr>
+
+
+  <!-- CSS only -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+  <div class="control">
+    <label class="radio">
+      <input type="radio" name="on" (click)="img0()" />On
+    </label>
+
+    <label class="radio">
+      <input type="radio" name="on" checked (click)="img1()" />Off
+    </label>
+  </div>
+
+  <div class="img">
+    <img src="../assets/im/switch-on.png" *ngIf="image0">
+    <img src="../assets/im/switch-off.png" *ngIf="image1">
+  </div> <br><br>
+
+
+
+  <div class="change d-flex">
+    <div class="border p-4" [ngStyle]="bl1">Blue</div> &nbsp;
+    <div class="border p-4" [ngStyle]="gr1">Green</div> &nbsp;
+    <div class="border p-4" [ngStyle]="bla1">Black</div> &nbsp;
+    <div class="border p-4" [ngStyle]="yl1">Yellow</div>
+  </div>
+  <input type="radio" name="color" (click)="showBlue()">Blue &nbsp;&nbsp;
+  <input type="radio" name="color" (click)="showGreen()">Green &nbsp;&nbsp;
+  <input type="radio" name="color" (click)="showBlack()">Black &nbsp;&nbsp;
+  <input type="radio" name="color" (click)="showYellow()">Yellow
+
+
+  <h1>Angular Dropdown</h1>
+
+  <div class="section">
+    <h4 style="font-weight:bold">Select a Branch</h4>
+    <select>
+      <option *ngFor="let item of this.dataList; let i = index" value="{{item.code}}" [selected]="i == 0">
+        {{item.name}}
+      </option>
+    </select>
+  </div>
+
+  <!doctype html>
+  <html lang="en">
+
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"></script>
+  </body>
+
+  </html>
+
+</div>
